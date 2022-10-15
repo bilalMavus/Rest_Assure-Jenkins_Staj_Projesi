@@ -58,7 +58,7 @@ public class PositionCategories {
                 .then()
                 .log().body()
                 .statusCode(400)
-                .body("message", equalTo("The Position Category with Name \"" + designName + "\" already exists."))
+                .body("message", equalTo("ThePosition Category with Name \"" + designName + "\" already exists."))
         ;
     }
 

@@ -19,7 +19,6 @@ public class Login {
         credential.put("username", "richfield.edu");
         credential.put("password", "Richfield2020!");
         credential.put("rememberMe", "true");
-
         return given()
                 .contentType(ContentType.JSON)
                 .body(credential)
