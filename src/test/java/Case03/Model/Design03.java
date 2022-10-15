@@ -1,15 +1,18 @@
 package Case03.Model;
 
+import java.util.Arrays;
+
 public class Design03 {
-    String id;
-    String name;
-    String attachmentStages;
-    String description;
-    String schoolId;
-    String translateName;
-    boolean active;
-    boolean required;
-    boolean useCamera;
+
+    private String id;
+    private String name;
+    private String description;
+    private String[] attachmentStages;
+    private boolean active;
+    private boolean required;
+    private boolean useCamera;
+    private String[] translateName;
+    private String schoolId;
 
     public String getId() {
         return id;
@@ -27,14 +30,6 @@ public class Design03 {
         this.name = name;
     }
 
-    public String getAttachmentStages() {
-        return attachmentStages;
-    }
-
-    public void setAttachmentStages(String attachmentStages) {
-        this.attachmentStages = attachmentStages;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -43,20 +38,12 @@ public class Design03 {
         this.description = description;
     }
 
-    public String getSchoolId() {
-        return schoolId;
+    public String[] getAttachmentStages() {
+        return attachmentStages;
     }
 
-    public void setSchoolId(String schoolId) {
-        this.schoolId = schoolId;
-    }
-
-    public String getTranslateName() {
-        return translateName;
-    }
-
-    public void setTranslateName(String translateName) {
-        this.translateName = translateName;
+    public void setAttachmentStages(String[] attachmentStages) {
+        this.attachmentStages = attachmentStages;
     }
 
     public boolean isActive() {
@@ -83,18 +70,34 @@ public class Design03 {
         this.useCamera = useCamera;
     }
 
+    public String[] getTranslateName() {
+        return translateName;
+    }
+
+    public void setTranslateName(String[] translateName) {
+        this.translateName = translateName;
+    }
+
+    public String getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(String schoolId) {
+        this.schoolId = schoolId;
+    }
+
     @Override
     public String toString() {
         return "Design03{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", attachmentStages='" + attachmentStages + '\'' +
                 ", description='" + description + '\'' +
-                ", schoolId='" + schoolId + '\'' +
-                ", translateName='" + translateName + '\'' +
+                ", attachmentStages=" + Arrays.toString(attachmentStages) +
                 ", active=" + active +
                 ", required=" + required +
                 ", useCamera=" + useCamera +
+                ", translateName=" + Arrays.toString(translateName) +
+                ", schoolId='" + schoolId + '\'' +
                 '}';
     }
 }

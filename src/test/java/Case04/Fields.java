@@ -26,10 +26,6 @@ public class Fields {
 
     String designCode;
 
-
-
-
-
     @Test
     public void createFields() {
 
