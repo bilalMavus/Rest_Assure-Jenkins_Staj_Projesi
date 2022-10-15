@@ -1,15 +1,12 @@
 package Case03;
 
-import Case01.Model.Design01;
+
 import Case03.Model.Design03;
 import Tools.Login;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookies;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.util.Arrays;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -95,14 +92,11 @@ public class DocumentTypes {
     @Test(dependsOnMethods = "updateDocumentTypes")
     public void deleteDocumentTypes() {
 
-
         given()
                 .cookies(cookies)
                 .pathParam("designId", designId)
-
                 .when()
                 .delete("school-service/api/attachments/{designId}")
-
                 .then()
                 .log().body()
                 .statusCode(200)
@@ -112,14 +106,11 @@ public class DocumentTypes {
     @Test(dependsOnMethods = "deleteDocumentTypes")
     public void deleteDocumentTypesNegative() {
 
-
         given()
                 .cookies(cookies)
                 .pathParam("designId", designId)
-
                 .when()
                 .delete("school-service/api/attachments/{designId}")
-
                 .then()
                 .log().body()
                 .statusCode(400)
