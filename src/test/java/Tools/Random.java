@@ -9,7 +9,7 @@ public class Random {
         return RandomStringUtils.randomAlphabetic(8).toLowerCase();
     }
 
-    public String getRandomCode() {
+    public static String getRandomCode() {
 
         return RandomStringUtils.randomAlphabetic(3).toLowerCase();
     }
