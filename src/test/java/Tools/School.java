@@ -1,4 +1,4 @@
-package Case07.Model;
+package Tools;
 public class School {
     private String id;
     public School(String id) {

@@ -1,7 +1,7 @@
 package Case07;
 
 import Case07.Model.Design07;
-import Case07.Model.School;
+import Tools.School;
 import Tools.Login;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookies;

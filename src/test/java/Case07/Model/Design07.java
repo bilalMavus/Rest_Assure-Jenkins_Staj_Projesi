@@ -1,4 +1,7 @@
 package Case07.Model;
+
+import Tools.School;
+
 public class Design07 {
     private String id;
     private String name;
