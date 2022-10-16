@@ -1,7 +1,5 @@
 package Case02.Model;
-
 public class Design02 {
-
     private String id;
     private String name;
     private String translateName;

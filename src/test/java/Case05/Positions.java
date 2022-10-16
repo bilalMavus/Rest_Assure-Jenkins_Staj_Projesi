@@ -9,20 +9,16 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-
 public class Positions {
 //Human Resources	Setup	Positions
-
     Cookies cookies;
     @BeforeClass
     public void login() {
         cookies = Login.loginCampus();
     }
-
     String designId;
     String designName;
     String designShortName;
-
     @Test
     public void createPositions() {
 
@@ -32,7 +28,6 @@ public class Positions {
         design05.setName(designName);
         design05.setShortName(designShortName);
         design05.setTenantId("5fe0786230cc4d59295712cf");
-
         designId =
                 given()
                         .cookies(cookies)
@@ -46,7 +41,6 @@ public class Positions {
                         .extract().jsonPath().getString("id")
         ;
     }
-
     @Test(dependsOnMethods = "createPositions")
     public void createPositionsNegative() {
 
@@ -54,7 +48,6 @@ public class Positions {
         design05.setName(designName);
         design05.setShortName(designShortName);
         design05.setTenantId("5fe0786230cc4d59295712cf");
-
         given()
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
@@ -67,7 +60,6 @@ public class Positions {
                 .body("message", equalTo("The Position with Name \"" + designName + "\" already exists."))
         ;
     }
-
     @Test(dependsOnMethods = "createPositions")
     public void updatePositions() {
 
@@ -78,7 +70,6 @@ public class Positions {
         design05.setName(designName);
         design05.setShortName(designShortName);
         design05.setTenantId("5fe0786230cc4d59295712cf");
-
         given()
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
@@ -91,7 +82,6 @@ public class Positions {
                 .body("name", equalTo(designName))
         ;
     }
-
     @Test(dependsOnMethods = "updatePositions")
     public void deletePositions() {
 
@@ -105,10 +95,8 @@ public class Positions {
                 .statusCode(204)
         ;
     }
-
   @Test(dependsOnMethods = "deletePositions")
     public void deletePositionsNegative() {
-
 
         given()
                 .cookies(cookies)
@@ -122,7 +110,6 @@ public class Positions {
                 .statusCode(204)
         ;
     }
-
     @Test(dependsOnMethods = "deletePositions")
     public void updatePositionsNegative() {
 
@@ -133,7 +120,6 @@ public class Positions {
         design05.setName(designName);
         design05.setShortName(designShortName);
         design05.setTenantId("5fe0786230cc4d59295712cf");
-
         given()
                 .cookies(cookies)
                 .contentType(ContentType.JSON)

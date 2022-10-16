@@ -1,9 +1,5 @@
 package Case07.Model;
-
-import java.util.Arrays;
-
 public class Design07 {
-
     private String id;
     private String name;
     private String shortName;
@@ -11,7 +7,6 @@ public class Design07 {
     private String type;
     private String capacity;
     private boolean active;
-
     public String getId() {
         return id;
     }

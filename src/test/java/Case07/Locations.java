@@ -8,32 +8,25 @@ import io.restassured.http.Cookies;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import javax.tools.Tool;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-
 public class Locations {
     //  Setup	School Setups	Locations
-
     Cookies cookies;
-
     @BeforeClass
     public void login() {
         cookies = Login.loginCampus();
     }
-
     String designId;
     String designName;
     String designShortName;
     String designCapacity;
-
     @Test
     public void createLocations() {
 
         designName = Tools.Random.getRandomName();
         designShortName = Tools.Random.getRandomName();
-        designCapacity = Tools.Random.getRandomInt(2);
+        designCapacity = Tools.Random.getRandomIntCode(2);
         Design07 design07 = new Design07();
         design07.setName(designName);
         design07.setShortName(designShortName);
@@ -41,7 +34,6 @@ public class Locations {
         design07.setSchool(new School("6343bf893ed01f0dc03a509a"));
         design07.setType("LABORATORY");
         design07.setActive(true);
-
         designId =
                 given()
                         .cookies(cookies)
@@ -55,7 +47,6 @@ public class Locations {
                         .extract().jsonPath().getString("id")
         ;
     }
-
     @Test(dependsOnMethods = "createLocations")
     public void createLocationsNegative() {
 
@@ -66,7 +57,6 @@ public class Locations {
         design07.setSchool(new School("6343bf893ed01f0dc03a509a"));
         design07.setType("LABORATORY");
         design07.setActive(true);
-
         given()
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
@@ -79,13 +69,12 @@ public class Locations {
                 .body("message", equalTo("The School Location with Name \"" + designName + "\" already exists."))
         ;
     }
-
     @Test(dependsOnMethods = "createLocations")
     public void updateLocations() {
 
         designName = Tools.Random.getRandomName();
         designShortName = Tools.Random.getRandomName();
-        designCapacity = Tools.Random.getRandomInt(2);
+        designCapacity = Tools.Random.getRandomIntCode(2);
         Design07 design07 = new Design07();
         design07.setId(designId);
         design07.setName(designName);
@@ -94,7 +83,6 @@ public class Locations {
         design07.setSchool(new School("6343bf893ed01f0dc03a509a"));
         design07.setType("OTHER");
         design07.setActive(true);
-
                 given()
                         .cookies(cookies)
                         .contentType(ContentType.JSON)
@@ -133,13 +121,12 @@ public class Locations {
                 .statusCode(400)
         ;
     }
-
     @Test(dependsOnMethods = "deleteLocations")
     public void updateLocationsNegative() {
 
         designName = Tools.Random.getRandomName();
         designShortName = Tools.Random.getRandomName();
-        designCapacity = Tools.Random.getRandomInt(2);
+        designCapacity = Tools.Random.getRandomIntCode(2);
         Design07 design07 = new Design07();
         design07.setId(designId);
         design07.setName(designName);
@@ -148,7 +135,6 @@ public class Locations {
         design07.setSchool(new School("6343bf893ed01f0dc03a509a"));
         design07.setType("OTHER");
         design07.setActive(true);
-
         given()
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
@@ -161,5 +147,4 @@ public class Locations {
                 .body("message", equalTo("SchoolLocation.ERROR.SCHOOL_LOCATION_NOT_FOUND"))
         ;
     }
-
 }

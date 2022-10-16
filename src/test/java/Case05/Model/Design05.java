@@ -1,9 +1,7 @@
 package Case05.Model;
 
 import java.util.Arrays;
-
 public class Design05 {
-
    private String id;
    private String name;
    private String shortName;

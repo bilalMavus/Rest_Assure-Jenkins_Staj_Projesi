@@ -13,7 +13,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class Attestations {
     //   Human Resources	Setup	Attestations
-
     Cookies cookies;
 
     @BeforeClass
@@ -22,7 +21,6 @@ public class Attestations {
     }
 
     String designId;
-
     String designName;
 
     @Test
@@ -44,31 +42,24 @@ public class Attestations {
                         .statusCode(201)
                         .extract().jsonPath().getString("id")
         ;
-
-
     }
 
-    @Test(dependsOnMethods ="createAttestations")
+    @Test(dependsOnMethods = "createAttestations")
     public void createAttestationsNegative() {
-
 
         Design02 design02 = new Design02();
         design02.setName(designName);
-
-
-                given()
-                        .cookies(cookies)
-                        .contentType(ContentType.JSON)
-                        .body(design02)
-                        .when()
-                        .post("school-service/api/attestation")
-                        .then()
-                        .log().body()
-                        .statusCode(400)
-                        .body("message", equalTo("The Attestation  with Name \"" + designName + "\" already exists."))
+        given()
+                .cookies(cookies)
+                .contentType(ContentType.JSON)
+                .body(design02)
+                .when()
+                .post("school-service/api/attestation")
+                .then()
+                .log().body()
+                .statusCode(400)
+                .body("message", equalTo("The Attestation  with Name \"" + designName + "\" already exists."))
         ;
-
-
     }
 
     @Test(dependsOnMethods = "createAttestations")
@@ -82,10 +73,8 @@ public class Attestations {
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
                 .body(design)
-
                 .when()
                 .put("school-service/api/attestation")
-
                 .then()
                 .log().body()
                 .statusCode(200)
@@ -93,34 +82,28 @@ public class Attestations {
         ;
     }
 
-
     @Test(dependsOnMethods = "updateAttestations")
     public void deleteAttestations() {
-
 
         given()
                 .cookies(cookies)
                 .pathParam("designId", designId)
-
                 .when()
                 .delete("school-service/api/attestation/{designId}")
-
                 .then()
                 .log().body()
                 .statusCode(204)
         ;
     }
+
     @Test(dependsOnMethods = "updateAttestations")
     public void deleteAttestationsNegative() {
-
 
         given()
                 .cookies(cookies)
                 .pathParam("designId", designId)
-
                 .when()
                 .delete("school-service/api/attestation/{designId}")
-
                 .then()
                 .log().body()
                 .statusCode(400)
@@ -138,17 +121,13 @@ public class Attestations {
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
                 .body(design)
-
                 .when()
                 .put("school-service/api/attestation")
-
                 .then()
                 .log().body()
                 .statusCode(400)
                 .body("message", equalTo("Can't find Attestation"))
         ;
     }
-
-
 }
 

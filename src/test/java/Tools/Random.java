@@ -2,23 +2,21 @@ package Tools;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.util.Locale;
+
 public class Random {
 
     public static String getRandomName() {
 
-        return RandomStringUtils.randomAlphabetic(8).toLowerCase();
+        return RandomStringUtils.randomAlphabetic(8).toUpperCase();
     }
 
-    public static String getRandomCode() {
+    public static String getRandomStringCode(int number) {
 
-        return RandomStringUtils.randomAlphabetic(3).toLowerCase();
+        return RandomStringUtils.randomAlphabetic(number).toUpperCase();
     }
 
-    public String getRandomSale() {
-
-        return RandomStringUtils.randomAlphabetic(2).toLowerCase();
-    }
-    public static String getRandomInt(int number) {
+    public static String getRandomIntCode(int number) {
 
         return RandomStringUtils.randomNumeric(number);
     }

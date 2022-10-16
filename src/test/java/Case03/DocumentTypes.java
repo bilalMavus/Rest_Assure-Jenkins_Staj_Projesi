@@ -1,6 +1,5 @@
 package Case03;
 
-
 import Case03.Model.Design03;
 import Tools.Login;
 import io.restassured.http.ContentType;
@@ -13,15 +12,12 @@ import static org.hamcrest.Matchers.equalTo;
 public class DocumentTypes {
     //Setup	Parameters	Document Types
     Cookies cookies;
-
     @BeforeClass
     public void login() {
         cookies = Login.loginCampus();
     }
-
     String designId;
     String designName;
-
     @Test
     public void createDocumentTypes() {
 
@@ -43,7 +39,6 @@ public class DocumentTypes {
                         .extract().jsonPath().getString("id")
         ;
     }
-
     @Test(dependsOnMethods = "createDocumentTypes")
     public void createDocumentTypesNegative() {
 
@@ -64,7 +59,6 @@ public class DocumentTypes {
                 .body("message", equalTo("Please provide valid data to create 'Attachment Type', your 'Attachment Type' already created"))
         ;
     }
-
     @Test(dependsOnMethods = "createDocumentTypes")
     public void updateDocumentTypes() {
 
@@ -77,18 +71,14 @@ public class DocumentTypes {
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
                 .body(design03)
-
                 .when()
                 .body("school-service/api/attachments")
-
                 .then()
                 .log().body()
                 .statusCode(200)
                 .body("name", equalTo(designName))
         ;
-
     }
-
     @Test(dependsOnMethods = "updateDocumentTypes")
     public void deleteDocumentTypes() {
 
@@ -102,7 +92,6 @@ public class DocumentTypes {
                 .statusCode(200)
         ;
     }
-
     @Test(dependsOnMethods = "deleteDocumentTypes")
     public void deleteDocumentTypesNegative() {
 
@@ -116,7 +105,6 @@ public class DocumentTypes {
                 .statusCode(400)
         ;
     }
-
     @Test(dependsOnMethods = "deleteDocumentTypes")
     public void updateDocumentTypesNegative() {
 
@@ -128,15 +116,12 @@ public class DocumentTypes {
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
                 .body(design03)
-
                 .when()
                 .put("school-service/api/attestation")
-
                 .then()
                 .log().body()
                 .statusCode(400)
                 .body("message", equalTo("Can't find Attestation"))
         ;
     }
-
 }
