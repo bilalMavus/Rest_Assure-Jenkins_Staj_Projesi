@@ -1,6 +1,5 @@
 package Case05;
 
-import Case03.Model.Design03;
 import Case05.Model.Design05;
 import Tools.Login;
 import io.restassured.http.ContentType;
@@ -15,7 +14,6 @@ public class Positions {
 //Human Resources	Setup	Positions
 
     Cookies cookies;
-
     @BeforeClass
     public void login() {
         cookies = Login.loginCampus();

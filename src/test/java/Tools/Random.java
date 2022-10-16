@@ -18,6 +18,10 @@ public class Random {
 
         return RandomStringUtils.randomAlphabetic(2).toLowerCase();
     }
+    public static String getRandomInt(int number) {
+
+        return RandomStringUtils.randomNumeric(number);
+    }
 
 
 }
