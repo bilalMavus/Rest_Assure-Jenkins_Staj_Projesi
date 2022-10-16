@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class Departments {
     //Setup	School Setups	Departments
@@ -24,15 +25,16 @@ public class Departments {
     String designCode;
 
     @Test
-    public void createDocumentTypes() {
+    public void createDepartments() {
+
         designName = Tools.Random.getRandomName();
         designCode = Tools.Random.getRandomStringCode(5);
         Design08 design08 = new Design08();
         design08.setName(designName);
         design08.setCode(designCode);
-        //design08.setSchool(new School("6343bf893ed01f0dc03a509a"));
-        //design08.setSchool2("6343bf893ed01f0dc03a509a");
-        //design08.setSchool3(new String[]{"6343bf893ed01f0dc03a509a"});
+        design08.setConstants(new String[]{});
+        design08.setSections(new String[]{});
+        design08.setSchool(new School("5fe07e4fb064ca29931236a5"));
         designId =
                 given()
                         .cookies(cookies)
@@ -44,6 +46,103 @@ public class Departments {
                         .log().body()
                         .statusCode(201)
                         .extract().jsonPath().getString("id")
+        ;
+    }
+    @Test(dependsOnMethods = "createDepartments")
+    public void createDepartmentsNegative() {
+        designName = Tools.Random.getRandomName();
+        designCode = Tools.Random.getRandomStringCode(5);
+        Design08 design08 = new Design08();
+        design08.setId(designId);
+        design08.setName(designName);
+        design08.setCode(designCode);
+        design08.setConstants(new String[]{});
+        design08.setSections(new String[]{});
+        design08.setSchool(new School("5fe07e4fb064ca29931236a5"));
+        given()
+                .cookies(cookies)
+                .contentType(ContentType.JSON)
+                .body(design08)
+                .when()
+                .post("school-service/api/department")
+                .then()
+                .log().body()
+                .statusCode(400)
+                .body("message", equalTo("Given school department already created. Please, check department info."))
+
+        ;
+    }
+    @Test(dependsOnMethods = "createDepartments")
+    public void updateDepartments() {
+
+        designName = Tools.Random.getRandomName();
+        designCode = Tools.Random.getRandomStringCode(5);
+        Design08 design08 = new Design08();
+        design08.setId(designId);
+        design08.setName(designName);
+        design08.setCode(designCode);
+        design08.setConstants(new String[]{});
+        design08.setSections(new String[]{});
+        design08.setSchool(new School("5fe07e4fb064ca29931236a5"));
+        given()
+                .cookies(cookies)
+                .contentType(ContentType.JSON)
+                .body(design08)
+                .when()
+                .put("school-service/api/department")
+                .then()
+                .log().body()
+                .statusCode(200)
+                .body("code", equalTo(designCode))
+        ;
+    }
+    @Test(dependsOnMethods = "updateDepartments")
+    public void deleteDepartments() {
+
+        given()
+                .cookies(cookies)
+                .pathParam("designId", designId)
+                .when()
+                .delete("school-service/api/department/{designId}")
+                .then()
+                .log().body()
+                .statusCode(204)
+        ;
+    }
+    @Test(dependsOnMethods = "deleteDepartments")
+    public void deleteDepartmentsNegative() {
+
+        given()
+                .cookies(cookies)
+                .pathParam("designId", designId)
+                .when()
+                .delete("school-service/api/department/{designId}")
+                .then()
+                .log().body()
+                .statusCode(204)
+        ;
+    }
+    @Test(dependsOnMethods = "deleteDepartments")
+    public void updateDepartmentsNegative() {
+
+        designName = Tools.Random.getRandomName();
+        designCode = Tools.Random.getRandomStringCode(5);
+        Design08 design08 = new Design08();
+        design08.setId(designId);
+        design08.setName(designName);
+        design08.setCode(designCode);
+        design08.setConstants(new String[]{});
+        design08.setSections(new String[]{});
+        design08.setSchool(new School("5fe07e4fb064ca29931236a5"));
+        given()
+                .cookies(cookies)
+                .contentType(ContentType.JSON)
+                .body(design08)
+                .when()
+                .put("school-service/api/department")
+                .then()
+                .log().body()
+                .statusCode(400)
         ;
     }
 }

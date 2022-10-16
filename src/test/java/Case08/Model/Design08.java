@@ -1,35 +1,19 @@
 package Case08.Model;
 
+
 import Tools.School;
 
 import java.util.Arrays;
 
 public class Design08 {
+
     private boolean active;
     private String code;
     private String[] constants;
     private String id;
     private String name;
     private School school;
-    private String school2;
-    private String[] school3;
     private String[] sections;
-
-    public String[] getSchool3() {
-        return school3;
-    }
-
-    public void setSchool3(String[] school3) {
-        this.school3 = school3;
-    }
-
-    public String getSchool2() {
-        return school2;
-    }
-
-    public void setSchool2(String school2) {
-        this.school2 = school2;
-    }
 
     public boolean isActive() {
         return active;
@@ -96,8 +80,6 @@ public class Design08 {
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", school=" + school +
-                ", school2='" + school2 + '\'' +
-                ", school3=" + Arrays.toString(school3) +
                 ", sections=" + Arrays.toString(sections) +
                 '}';
     }
